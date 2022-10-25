@@ -30,6 +30,18 @@ userSchema.statics.build = (attrs: UserAttrs) => {
     return new User(attrs);
 };
 
+// model function overall is going to return
+// something of type "UserModel"
+// first argument is the schema of our document
+
+// MONGOOSE TYPE
+// export function model<T, U, TQueryHelpers = {}>(
+//     name: string,
+//     schema?: Schema<T, any, any, TQueryHelpers, any, any>,
+//     collection?: string,
+//     options?: CompileModelOptions
+//   ): U;
+
 const User = mongoose.model<UserDoc, UserModel>('User', userSchema);
 
 export { User };
