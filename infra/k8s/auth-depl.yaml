@@ -15,6 +15,12 @@ spec:
       containers:
         - name: auth
           image: yusuferen/auth
+          env:
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwtt-secret
+                  key: JWT_KEY
 ---
 apiVersion: v1
 kind: Service
