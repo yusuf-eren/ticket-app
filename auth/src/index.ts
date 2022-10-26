@@ -2,6 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import { json } from 'body-parser';
 import mongoose from 'mongoose';
+import cookieSession from 'cookie-session';
 
 import { currentUserRouter } from './routes/current-user';
 import { signinRouter } from './routes/signin';
@@ -12,6 +13,11 @@ import { NotFoundError } from './errors/not-found-error';
 
 const app = express();
 app.use(json());
+app.use(
+    cookieSession({
+        signed: false,
+    })
+);
 
 app.use(currentUserRouter);
 app.use(signinRouter);
@@ -27,7 +33,7 @@ app.use(errorHandler);
 const start = async () => {
     try {
         await mongoose.connect('mongodb://auth-mongo-srv:27017/auth');
-        console.log("Successfully connected to db")
+        console.log('Successfully connected to db');
     } catch (error) {
         console.log(error);
     }
